@@ -15,7 +15,7 @@ export ANDROID_MAJOR_VERSION=t
 BUILD_CROSS_COMPILE=$PARENT_DIR/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 KERNEL_LLVM_BIN=$PARENT_DIR/llvm-arm-toolchain-ship-10.0/bin/clang
 CLANG_TRIPLE=aarch64-linux-gnu-
-KERNEL_MAKE_ENV="DTC_EXT=$(pwd)/tools/dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y"
+KERNEL_MAKE_ENV="CONFIG_BUILD_ARM64_DT_OVERLAY=y"
 
 DTS_DIR=$(pwd)/out/arch/$ARCH/boot/dts
 
