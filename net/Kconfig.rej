@@ -1,0 +1,10 @@
+--- net/Kconfig
++++ net/Kconfig
+@@ -236,6 +236,7 @@ source "net/dcb/Kconfig"
+ source "net/dns_resolver/Kconfig"
+ source "net/batman-adv/Kconfig"
+ source "net/openvswitch/Kconfig"
++source "net/shortcut-fe/Kconfig"
+ 
+ config RPS
+ 	boolean "RPS"

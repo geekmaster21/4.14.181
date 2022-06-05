@@ -1,0 +1,31 @@
+--- net/core/dev.c
++++ net/core/dev.c
+@@ -3177,7 +3174,6 @@ static int __netif_receive_skb(struct sk_buff *skb)
+ 	bool deliver_exact = false;
+ 	int ret = NET_RX_DROP;
+ 	__be16 type;
+-	int (*fast_recv)(struct sk_buff *skb);
+ 
+ 	net_timestamp_check(!netdev_tstamp_prequeue, skb);
+ 
+@@ -3195,18 +3191,10 @@ static int __netif_receive_skb(struct sk_buff *skb)
+ 	skb_reset_transport_header(skb);
+ 	skb_reset_mac_len(skb);
+ 
++	pt_prev = NULL;
++
+ 	rcu_read_lock();
+ 
+-	fast_recv = rcu_dereference(athrs_fast_nat_recv);
+-	if (fast_recv) {
+-		if (fast_recv(skb)) {
+-			rcu_read_unlock();
+-			return NET_RX_SUCCESS;
+-		}
+-	}
+-
+-	pt_prev = NULL;
+-
+ another_round:
+ 
+ 	__this_cpu_inc(softnet_data.processed);
