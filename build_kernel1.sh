@@ -4,7 +4,7 @@
 
 if [ ! -d "$(pwd)/gcc/" ]; then
 
-   git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 gcc -b android-9.0.0_r59 --depth 1 >> /dev/null 2> /dev/null
+   git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 gcc -b android-msm-sunfish-4.14-t-preview-2 --depth 1 >> /dev/null 2> /dev/null
 
 fi
 
