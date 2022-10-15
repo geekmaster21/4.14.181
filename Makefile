@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0
 VERSION = 4
 PATCHLEVEL = 14
-SUBLEVEL = 281
+SUBLEVEL = 295
 EXTRAVERSION =
 NAME = Petit Gorille
 
@@ -377,7 +377,7 @@ endif
 # Make variables (CC, etc...)
 AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
-CC		= /home/ubuntu/msm-4.14/toolchain/clang/bin/clang
+CC		= /home/ubuntu/kernel/llvm-sdclang/bin/clang
 LDGOLD		= $(CROSS_COMPILE)ld.gold
 CPP		= $(CC) -E
 AR		= $(CROSS_COMPILE)ar

@@ -51,7 +51,7 @@ export CROSS_COMPILE="$(pwd)/gcc/bin/aarch64-linux-android-"
 export CLANG_TRIPLE="aarch64-linux-gnu-"
 
 export CC="$(pwd)/llvm-sdclang/bin/clang"
-
+KERNEL_MAKE_ENV="DTC_EXT=$(pwd)/tools/dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y"
 # Export if/else outdir var
 
 export WITH_OUTDIR=true
@@ -86,9 +86,9 @@ fi
 
 if [ "${WITH_OUTDIR}" == true ]; then
 
-   "${CCACHE}" make O=a71 a71_eur_open_defconfig
+   "${CCACHE}" make O=a71 $KERNEL_MAKE_ENV a71_eur_open_defconfig
 
-   "${CCACHE}" make -j$(nproc --all) O=a71
+   "${CCACHE}" make -j$(nproc --all) $KERNEL_MAKE_ENV O=a71
 
    tools/mkdtimg create a71/arch/arm64/boot/dtbo.img --page_size=4096 $(find a71/arch -name "*.dtbo")
 
