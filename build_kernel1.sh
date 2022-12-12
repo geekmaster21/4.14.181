@@ -8,9 +8,9 @@ if [ ! -d "$(pwd)/gcc/" ]; then
 
 fi
 
-if [ ! -d "$(pwd)/llvm-sdclang/" ]; then
+if [ ! -d "$(pwd)/clang/" ]; then
 
-   git clone https://github.com/proprietary-stuff/llvm-arm-toolchain-ship-10.0 llvm-sdclang --depth 1 >> /dev/null 2> /dev/null
+   git clone https://github.com/kdrag0n/proton-clang clang --depth 1 >> /dev/null 2> /dev/null
 
 fi
 
@@ -28,9 +28,9 @@ export SUBARCH="arm"
 
 # Export ANDROID VERSION
 
-export PLATFORM_VERSION=12
+export PLATFORM_VERSION=13
 
-export ANDROID_MAJOR_VERSION=S
+export ANDROID_MAJOR_VERSION=T
 
 # Export CCACHE
 
@@ -46,12 +46,11 @@ ccache -M 50G
 
 # Export toolchain/clang/llvm flags
 
-export CROSS_COMPILE="$(pwd)/gcc/bin/aarch64-linux-android-"
+export CROSS_COMPILE="/home/ubuntu/kernel/gcc/bin/aarch64-linux-android-"
 
 export CLANG_TRIPLE="aarch64-linux-gnu-"
-
-export CC="$(pwd)/llvm-sdclang/bin/clang"
-KERNEL_MAKE_ENV="DTC_EXT=$(pwd)/tools/dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y"
+export CC="/home/ubuntu/kernel/clang/bin/clang"
+KERNEL_MAKE_ENV="DTC_EXT=/home/ubuntu/kernel/tools/dtc" 
 # Export if/else outdir var
 
 export WITH_OUTDIR=true

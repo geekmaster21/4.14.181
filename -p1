@@ -1,10 +1,47 @@
---- Kconfig
-+++ Kconfig
-@@ -236,6 +236,7 @@ source "net/dcb/Kconfig"
- source "net/dns_resolver/Kconfig"
- source "net/batman-adv/Kconfig"
- source "net/openvswitch/Kconfig"
-+source "net/shortcut-fe/Kconfig"
- 
- config RPS
- 	boolean "RPS"
+───────────────────────────────────────────────────────────────────────────────────────────────── 'interactive' cpufreq policy governor ─────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ CONFIG_CPU_FREQ_GOV_INTERACTIVE:                                                                                                                                                                                                        │  
+  │                                                                                                                                                                                                                                         │  
+  │ 'interactive' - This driver adds a dynamic cpufreq policy governor                                                                                                                                                                      │  
+  │ designed for latency-sensitive workloads.                                                                                                                                                                                               │  
+  │                                                                                                                                                                                                                                         │  
+  │ This governor attempts to reduce the latency of clock                                                                                                                                                                                   │  
+  │ increases so that the system is more responsive to                                                                                                                                                                                      │  
+  │ interactive workloads.                                                                                                                                                                                                                  │  
+  │                                                                                                                                                                                                                                         │  
+  │ To compile this driver as a module, choose M here: the                                                                                                                                                                                  │  
+  │ module will be called cpufreq_interactive.                                                                                                                                                                                              │  
+  │                                                                                                                                                                                                                                         │  
+  │ For details, take a look at linux/Documentation/cpu-freq.                                                                                                                                                                               │  
+  │                                                                                                                                                                                                                                         │  
+  │ If in doubt, say N.                                                                                                                                                                                                                     │  
+  │                                                                                                                                                                                                                                         │  
+  │ Symbol: CPU_FREQ_GOV_INTERACTIVE [=y]                                                                                                                                                                                                   │  
+  │ Type  : tristate                                                                                                                                                                                                                        │  
+  │ Prompt: 'interactive' cpufreq policy governor                                                                                                                                                                                           │  
+  │   Location:                                                                                                                                                                                                                             │  
+  │     -> CPU Power Management                                                                                                                                                                                                             │  
+  │       -> CPU Frequency scaling                                                                                                                                                                                                          │  
+  │         -> CPU Frequency scaling (CPU_FREQ [=y])                                                                                                                                                                                        │  
+  │   Defined at drivers/cpufreq/Kconfig:233                                                                                                                                                                                                │  
+  │   Depends on: CPU_FREQ [=y]                                                                                                                                                                                                             │  
+  │   Selects: CPU_FREQ_GOV_ATTR_SET [=y] && IRQ_WORK [=y]                                                                                                                                                                                  │  
+  │   Selected by: CPU_FREQ_DEFAULT_GOV_INTERACTIVE [=n] && <choice>                                                                                                                                                                        │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  │                                                                                                                                                                                                                                         │  
+  ├─────────────────────────────────────────────────────────────────────────────────────────────────────────
