@@ -85,7 +85,7 @@ fi
 
 if [ "${WITH_OUTDIR}" == true ]; then
 
-   "${CCACHE}" make O=a71 $KERNEL_MAKE_ENV a71_eur_open_defconfig
+   "${CCACHE}" make O=a71 $KERNEL_MAKE_ENV a71_defconfig
 
    "${CCACHE}" make -j$(nproc --all) $KERNEL_MAKE_ENV O=a71
 
