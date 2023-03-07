@@ -46,11 +46,11 @@ ccache -M 50G
 
 # Export toolchain/clang/llvm flags
 
-export CROSS_COMPILE="/home/ubuntu/kernel/gcc/bin/aarch64-linux-android-"
+export CROSS_COMPILE="/home/ubuntu/Kernel/gcc/bin/aarch64-linux-android-"
 
 export CLANG_TRIPLE="aarch64-linux-gnu-"
-export CC="/home/ubuntu/kernel/clang/bin/clang"
-KERNEL_MAKE_ENV="DTC_EXT=/home/ubuntu/kernel/tools/dtc" 
+export CC="/home/ubuntu/Kernel/clang/bin/clang"
+KERNEL_MAKE_ENV="DTC_EXT=/home/ubuntu/Kernel/tools/dtc" 
 # Export if/else outdir var
 
 export WITH_OUTDIR=true
