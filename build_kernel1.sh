@@ -49,7 +49,7 @@ ccache -M 50G
 export CROSS_COMPILE="/home/ubuntu/Kernel/gcc/bin/aarch64-linux-android-"
 
 export CLANG_TRIPLE="aarch64-linux-gnu-"
-export CC="/home/ubuntu/clang/bin/clang"
+export CC="/home/ubuntu/Kernel/clang/bin/clang"
 KERNEL_MAKE_ENV="DTC_EXT=/home/ubuntu/Kernel/tools/dtc" 
 # Export if/else outdir var
 
@@ -86,7 +86,7 @@ fi
 if [ "${WITH_OUTDIR}" == true ]; then
 
    "${CCACHE}" make O=a71 $KERNEL_MAKE_ENV a71_defconfig
-
+   
    "${CCACHE}" make -j$(nproc --all) $KERNEL_MAKE_ENV O=a71
 
    tools/mkdtimg create a71/arch/arm64/boot/dtbo.img --page_size=4096 $(find a71/arch -name "*.dtbo")

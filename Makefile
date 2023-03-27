@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0
 VERSION = 4
 PATCHLEVEL = 14
-SUBLEVEL = 300
+SUBLEVEL = 308
 EXTRAVERSION =
 NAME = Petit Gorille
 
@@ -377,6 +377,7 @@ endif
 # Make variables (CC, etc...)
 ifneq ($(LLVM),)
 CC		= clang
+AS.       = llvm-as
 LD		= ld.lld
 AR		= llvm-ar
 NM		= llvm-nm
@@ -408,7 +409,7 @@ endif
 # warnings and causes the build to stop upon encountering t
 
 CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
-		  -Wbitwise -Wno-return-void $(CF)
+		++  -Wbitwise -Wno-return-void $(CF)
 NOSTDINC_FLAGS  =
 CFLAGS_MODULE   =
 AFLAGS_MODULE   =
