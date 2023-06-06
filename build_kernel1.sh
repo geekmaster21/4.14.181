@@ -18,7 +18,7 @@ fi
 
 export KBUILD_BUILD_USER="Geekmaster21"
 
-export KBUILD_BUILD_HOST="OVH"
+export KBUILD_BUILD_HOST="Gitpod"
 
 # Export ARCH/SUBARCH flags
 
@@ -46,11 +46,11 @@ ccache -M 50G
 
 # Export toolchain/clang/llvm flags
 
-export CROSS_COMPILE="/home/ubuntu/Kernel/gcc/bin/aarch64-linux-android-"
+export CROSS_COMPILE="/workspace/4.14.181/gcc/bin/aarch64-linux-android-"
 
 export CLANG_TRIPLE="aarch64-linux-gnu-"
-export CC="/home/ubuntu/Kernel/clang/bin/clang"
-KERNEL_MAKE_ENV="DTC_EXT=/home/ubuntu/Kernel/tools/dtc" 
+export CC="/workspace/4.14.181/clang/bin/clang"
+KERNEL_MAKE_ENV="DTC_EXT=/workspace/4.14.181/tools/dtc" 
 # Export if/else outdir var
 
 export WITH_OUTDIR=true

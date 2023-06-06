@@ -227,4 +227,3 @@ obj-y  += security/samsung/tzic/
 
 # SPU signature verify
 obj-$(CONFIG_SPU_VERIFY) += spu_verify/
-obj-y += kernelsu/

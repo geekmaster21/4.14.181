@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0
 VERSION = 4
 PATCHLEVEL = 14
-SUBLEVEL = 308
+SUBLEVEL = 316
 EXTRAVERSION =
 NAME = Petit Gorille
 
@@ -388,7 +388,7 @@ STRIP		= llvm-strip
 else
 AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
-CC        = /home/ubuntu/Kernel/clang/bin/clang
+CC        = /workspace/4.14.181/clang/bin/clang
 LDGOLD		= $(CROSS_COMPILE)ld.gold
 CPP		= $(CC) -E
 AR		= $(CROSS_COMPILE)ar
