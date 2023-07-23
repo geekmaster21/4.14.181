@@ -1,0 +1,88 @@
+diff --git a/drivers/cpufreq/cpufreq.c b/drivers/cpufreq/cpufreq.c
+index 0e3f6496524d..478a18364b1f 100644
+--- a/drivers/cpufreq/cpufreq.c
++++ b/drivers/cpufreq/cpufreq.c
+@@ -25,6 +25,7 @@
+ #include <linux/kernel_stat.h>
+ #include <linux/module.h>
+ #include <linux/mutex.h>
++#include <linux/sched/clock.h>
+ #include <linux/slab.h>
+ #include <linux/suspend.h>
+ #include <linux/syscore_ops.h>
+@@ -977,6 +978,66 @@ __weak struct cpufreq_governor *cpufreq_default_governor(void)
+ 	return NULL;
+ }
+ 
++static int find_dvfs_latency(struct cpufreq_policy *policy, unsigned long freq,
++			     unsigned int *latency_ns)
++{
++	u64 time;
++	int ret;
++
++	time = local_clock();
++	ret = __cpufreq_driver_target(policy, freq, CPUFREQ_RELATION_L);
++	*latency_ns = local_clock() - time;
++
++	return ret;
++}
++
++/*
++ * Find the transition latency dynamically by:
++ * - Switching to min freq first.
++ * - Then switching to max freq.
++ * - And finally switching back to the initial freq.
++ *
++ * The maximum duration of the above three freq changes should be good enough to
++ * find the maximum transition latency for a platform.
++ */
++static void cpufreq_find_target_latency(struct cpufreq_policy *policy)
++{
++	unsigned long initial_freq = policy->cur;
++	unsigned int latency_ns, latency_max_ns;
++	int ret;
++
++	if (!has_target())
++		return;
++
++	/* Limit to drivers with latency set to CPUFREQ_ETERNAL for now */
++	if (policy->cpuinfo.transition_latency != CPUFREQ_ETERNAL)
++		return;
++
++	/* Go to min frequency first */
++	ret = find_dvfs_latency(policy, policy->cpuinfo.min_freq, &latency_ns);
++	if (ret)
++		return;
++
++	latency_max_ns = latency_ns;
++
++	/* Go to max frequency then.. */
++	ret = find_dvfs_latency(policy, policy->cpuinfo.max_freq, &latency_ns);
++	if (ret)
++		return;
++
++	latency_max_ns = max(latency_max_ns, latency_ns);
++
++	/* And finally switch back to where we started from */
++	ret = find_dvfs_latency(policy, initial_freq, &latency_ns);
++	if (ret)
++		return;
++
++	policy->cpuinfo.transition_latency = max(latency_max_ns, latency_ns);
++
++	pr_info("%s: Setting transition latency to %u ns for policy of CPU%d\n",
++		__func__, policy->cpuinfo.transition_latency, policy->cpu);
++}
++
+ static int cpufreq_init_policy(struct cpufreq_policy *policy)
+ {
+ 	struct cpufreq_governor *gov = NULL;
+@@ -1246,6 +1307,8 @@ static int cpufreq_online(unsigned int cpu)
+ 	}
+ 
+ 	if (new_policy) {
++		cpufreq_find_target_latency(policy);
++
+ 		ret = cpufreq_add_dev_interface(policy);
+ 		if (ret)
+ 			goto out_exit_policy;

@@ -388,7 +388,7 @@ STRIP		= llvm-strip
 else
 AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
-CC        = /workspace/4.14.181/clang/bin/clang
+CC        = /home/ubuntu/kernel/clang/bin/clang
 LDGOLD		= $(CROSS_COMPILE)ld.gold
 CPP		= $(CC) -E
 AR		= $(CROSS_COMPILE)ar
